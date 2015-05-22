@@ -1,0 +1,53 @@
+﻿@using Fanex.Service.Core.Extensions;
+@using Fanex.OandaExChangeRate.Business.Model;
+@{ int index = 0; }
+<div>
+    <div>
+        Dear All,<br />
+        <br />
+    </div>
+    <div>Remaining quote has been changed </div>
+    <br />
+    
+    <table cellspacing="0" border="1" style="border-color: #CECCCD; border-style: Solid; font-size: 10pt; font-family: Tahoma, Arial, Verdana, Sans-Serif;" rules="all">
+        <thead>
+            <tr style="color: black; font-weight: bold">
+                <td align="center" style="width: 40px; background-color: #7A97D1;">
+                    #
+                    <br />
+                </td>
+                <td align="center" style="background-color: #7A97D1; width: 200px">                        
+                    Log Time
+                </td>
+                <td align="right" style="background-color: #7A97D1; width: 200px">                        
+                    Remaining Quotes
+                </td>
+            </tr>
+        </thead>
+        <tbody>            
+             @foreach (RemainingQuote quote in @Model)
+             {
+                 index++;
+                 <tr style="color: black; height:25px ">
+                    <td align="center">
+                        @index
+                    </td>
+                    <td align="center">
+                        @quote.CreatedDate
+                    </td>
+                    <td align="right">
+                        @quote.Quotes
+                    </td>
+                </tr>
+             }
+        </tbody>
+    </table>
+
+    <div>
+    <br />
+        Best regards,<br />
+        <br />
+        Starix IT.<br /><br />
+        <i>This is system auto generated email, please do not reply to this email directly.</i>
+    </div>
+</div>
