@@ -54,10 +54,10 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
             return string.Format("{0:#,##0}", quotes);
         }
 
-        public void Insert(string qoutes)
+        public void Insert(int qoutes)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
-            data.Add("Remaining_quotes", qoutes);
+            data.Add("Remaining_quotes", qoutes.ToString());
             data.Add("CreatedDate", DateTime.Now.ToString());
             Converter.ToInt(_db.Insert("Log", data));
         }

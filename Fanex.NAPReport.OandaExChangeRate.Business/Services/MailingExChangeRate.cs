@@ -95,18 +95,12 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 
                 string quotes = _remainingQuoteDAO.GetRemainningQuote();
 
-                if (AppSettings.IsSimulateRate)
-                {
-                    Random rd = new Random();
-                    quotes = rd.Next(100000).ToString();
-                }
-
-                int currentQuotes = Converter.ToInt(quotes);
+                int currentQuotes = Converter.ToInt(quotes.Replace(",", string.Empty)); 
                 int quotesFromDB = _remainingQuoteDAO.SelectLastest();
                 int variance = Math.Abs(quotesFromDB - currentQuotes);
                 if (variance >= AppSettings.RemainingVariance)
                 {
-                    _remainingQuoteDAO.Insert(quotes);
+                    _remainingQuoteDAO.Insert(currentQuotes); 
                     _remainingQuoteDAO.Delete();
 
                     mail.Body = GenerateBody(_remainingQuoteDAO.SelectAll());

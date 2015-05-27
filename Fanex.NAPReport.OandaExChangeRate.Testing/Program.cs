@@ -22,6 +22,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Testing
             Console.WriteLine("Done at " + DateTime.Now.ToString());
 
             MailClientHandler.Stop();
+
             Console.ReadLine();
         }
     }

@@ -23,7 +23,7 @@ using System.Data;
 
         int SelectLastest();
 
-        void Insert(string qoutes);        
+        void Insert(int qoutes);        
 
         void Delete();
 
