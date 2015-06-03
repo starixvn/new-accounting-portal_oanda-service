@@ -16,8 +16,8 @@ namespace Fanex.NAPReport.OandaExChangeRate.Testing
             MailClientHandler.Start();
 
             IMailingExChangeRate exChangerate = new MailingExChangeRate();
-            //exChangerate.UpdateDailyExchangeRate();
-            exChangerate.UpdateRemainingQuotes();
+            exChangerate.UpdateDailyExchangeRate();
+            //exChangerate.UpdateRemainingQuotes();
 
             Console.WriteLine("Done at " + DateTime.Now.ToString());
 
