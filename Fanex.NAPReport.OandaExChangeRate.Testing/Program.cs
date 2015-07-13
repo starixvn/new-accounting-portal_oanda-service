@@ -10,18 +10,25 @@ namespace Fanex.NAPReport.OandaExChangeRate.Testing
     {
         static void Main(string[] args)
         {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            try
+            {
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
-            DbSettingProviderManager.Current.Start();
-            MailClientHandler.Start();
+                DbSettingProviderManager.Current.Start();
+                //MailClientHandler.Start();
 
-            IMailingExChangeRate exChangerate = new MailingExChangeRate();
-            exChangerate.UpdateDailyExchangeRate();
-            //exChangerate.UpdateRemainingQuotes();
+                IMailingExChangeRate exChangerate = new MailingExChangeRate();
+                exChangerate.UpdateDailyExchangeRate();
+                //exChangerate.UpdateRemainingQuotes();
 
-            Console.WriteLine("Done at " + DateTime.Now.ToString());
+                Console.WriteLine("Done at " + DateTime.Now.ToString());
 
-            MailClientHandler.Stop();
+                //MailClientHandler.Stop();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             Console.ReadLine();
         }
