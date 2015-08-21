@@ -15,15 +15,14 @@ namespace Fanex.NAPReport.OandaExChangeRate.Testing
                 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
                 DbSettingProviderManager.Current.Start();
-                //MailClientHandler.Start();
+                
 
                 IMailingExChangeRate exChangerate = new MailingExChangeRate();
                 exChangerate.UpdateDailyExchangeRate();
-                //exChangerate.UpdateRemainingQuotes();
 
                 Console.WriteLine("Done at " + DateTime.Now.ToString());
 
-                //MailClientHandler.Stop();
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
