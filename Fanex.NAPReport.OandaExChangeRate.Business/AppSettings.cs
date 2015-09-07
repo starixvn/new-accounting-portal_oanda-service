@@ -44,7 +44,10 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
             get
             {
                 var val = ConfigurationManager.AppSettings["OandaExchangeRate.Subject"];
-                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["OandaExchangeRate.Subject"]);
+                val = val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["OandaExchangeRate.Subject"]);
+                val = string.Format(val, DateTime.Today.ToString("yyyy/MM/dd"));
+
+                return val;
             }
         }
 
@@ -53,7 +56,10 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
             get
             {
                 var val = ConfigurationManager.AppSettings["OandaExchangeRate.SubjectRemainingQuotes"];
-                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["OandaExchangeRate.SubjectRemainingQuotes"]);
+                val = val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["OandaExchangeRate.SubjectRemainingQuotes"]);
+                val = string.Format(val, DateTime.Today.ToString("yyyy/MM/dd"));
+
+                return val;
             }
         }
 
