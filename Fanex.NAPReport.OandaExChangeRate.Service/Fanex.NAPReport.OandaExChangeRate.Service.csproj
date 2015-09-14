@@ -214,6 +214,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="SQLiteDB\AutoMail-ExchangeRateOanda.s3db" />
+    <Content Include="Templates\NoteEmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SQL\" />
