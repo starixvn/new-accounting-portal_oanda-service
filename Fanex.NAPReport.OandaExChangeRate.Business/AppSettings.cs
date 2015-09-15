@@ -194,5 +194,13 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
             get;
             set;
         }
+
+        public static string NapReportURL
+        {
+            get 
+            {
+                return GetSettingValueByKey("OandaExchangeRate.NapReportURL");
+            }
+        }
     }
 }

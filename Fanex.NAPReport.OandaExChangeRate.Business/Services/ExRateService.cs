@@ -9,6 +9,7 @@
     using Fanex.NAPReport.OandaExChangeRate.Business.Services.CurrencyConverter;
     using Fanex.Service.Core.Extensions;
     using Fanex.OandaExChangeRate.Business.DataAccess;
+    using RazorEngine;
 
     public class ExRateService
     {
@@ -170,8 +171,10 @@
                 }
             }
 
+            var note = GetNoteEmailTemplate();
 
             BodyContent += "<br/><br/>Remaining quotes: " + remainingQuotes;
+            BodyContent += "<br/><br/>" + note;
 
             return updateResult;
         }
@@ -302,6 +305,15 @@
         {
             get;
             set;
+        }
+
+        private string GetNoteEmailTemplate()
+        {
+            string appLocation = AppDomain.CurrentDomain.BaseDirectory;
+            var template = File.ReadAllText(appLocation + @"/Templates/NoteEmailTemplate.cshtml");
+            var note = Razor.Parse(template);
+
+            return note;
         }
     }
 }
