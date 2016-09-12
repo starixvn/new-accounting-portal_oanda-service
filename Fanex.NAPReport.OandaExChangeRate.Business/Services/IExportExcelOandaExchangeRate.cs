@@ -16,8 +16,8 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
     /// </summary>
     public interface IExportExcelOandaExchangeRate
     {
-        void ExportExcel(Dictionary<string, Dictionary<string, double>> allCurrenciesList, string remainingQuotes);
-
         string FolderPath { get; set; }
+
+        void ExportExcel(Dictionary<string, Dictionary<string, double>> allCurrenciesList, string remainingQuotes);        
     }
 }

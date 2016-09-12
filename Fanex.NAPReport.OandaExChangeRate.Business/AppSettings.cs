@@ -15,7 +15,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
     /// </summary>
     public class AppSettings : AppSettingBase
     {
-        public static string ServiceName
+        public static new string ServiceName
         {
             get
             {
@@ -23,7 +23,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
             }
         }
 
-        public static int Interval
+        public static new int Interval
         {
             get
             {
@@ -71,7 +71,6 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
                 return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["OandaExchangeRate.Title"]);
             }
         }
-
 
         public static string[] BaseCurrencies
         {
@@ -189,7 +188,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
             }
         }
 
-        public static bool OnProcessing
+        public static new bool OnProcessing
         {
             get;
             set;
