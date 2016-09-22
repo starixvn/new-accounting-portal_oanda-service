@@ -16,14 +16,14 @@
     {
         private IExchangeRateDAO _exchagenRateDAO;
         private IExportExcelOandaExchangeRate _exportExcel;
-        private Random _random = new Random();
+        private Random _random = new Random();        
 
         public ExRateService()
         {
             _exchagenRateDAO = new ExchangeRateDAO();
             _exportExcel = new ExportExcelOandaExchangeRate();
-        }
 
+        }
         public string FolderPath
         {
             get;
@@ -104,10 +104,10 @@
             htmlContent.RenderEndTag();
             var exchangeRateList = new Dictionary<string, double>();
             Dictionary<string, Dictionary<string, double>> allCurrenciesList = new Dictionary<string, Dictionary<string, double>>();
-
+            var ignoreCurrencies = IgnoreCurrenyList();
             foreach (var currency in listCurrency)
             {
-                if (currency.ToLower().Equals("c") || currency.ToLower().Equals("h") || currency.ToLower().Equals("uus"))
+                if (ignoreCurrencies.Contains(currency.ToLower()))
                 {
                     continue;
                 }
@@ -161,6 +161,9 @@
             {
                 _exchagenRateDAO.UpdateRate("UUS", DateTime.Now, exchangeRateList);
                 _exchagenRateDAO.UpdateRate("UUS", DateTime.Now.AddDays(1), exchangeRateList);
+                _exchagenRateDAO.UpdateRate("YNG", DateTime.Now, exchangeRateList);
+                _exchagenRateDAO.UpdateRate("YNG", DateTime.Now.AddDays(1), exchangeRateList);
+
                 _exportExcel.ExportExcel(allCurrenciesList, remainingQuotes);
                 FolderPath = _exportExcel.FolderPath;
             }
@@ -317,6 +320,19 @@
             var note = Razor.Parse(template);
 
             return note;
+        }
+
+        private List<string> IgnoreCurrenyList()
+        {
+            List<string> currencies = new List<string>()
+            {
+                "c",
+                "h",
+                "uus",
+                "yng"
+            };
+
+            return currencies;
         }
     }
 }
