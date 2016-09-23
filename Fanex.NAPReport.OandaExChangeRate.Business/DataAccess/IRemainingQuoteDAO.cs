@@ -6,11 +6,7 @@
 
 namespace Fanex.OandaExChangeRate.Business.DataAccess
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-using System.Data;
+    using System.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -23,9 +19,8 @@ using System.Data;
 
         int SelectLastest();
 
-        void Insert(int qoutes);        
+        void Insert(int qoutes);
 
         void Delete();
-
     }
 }

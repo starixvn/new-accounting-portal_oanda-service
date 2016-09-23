@@ -8,15 +8,12 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Data;
-    using Fanex.AccountingReports.SqLiteDatabase;
-    using Fanex.NAPReport.OandaExChangeRate.Business;
     using System.Net;
     using System.Xml;
+    using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
-    using Fanex.Service.Core.Extensions;
+    using Fanex.NAPReport.OandaExChangeRate.Business;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,6 +29,11 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
 
         public string GetRemainningQuote()
         {
+            if(AppSettings.IsSimulateRate)
+            {
+                return "0";
+            }
+
             string url = AppSettings.RemainingQuoteUrl;
 
             var request = WebRequest.Create(url);
@@ -64,10 +66,9 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
 
         public void Delete()
         {
-            string sql = "delete from log where id < (select max(id) - "+ AppSettings.RemainingHistory +" from log)";
+            string sql = "delete from log where id < (select max(id) - " + AppSettings.RemainingHistory + " from log)";
             _db.ExecuteNonQuery(sql);
         }
-
 
         public DataTable SelectAll()
         {
@@ -78,16 +79,16 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
         }
 
         public int SelectLastest()
-        {            
+        {
             string sql = "select * from Log where Id  in (select max(Id) from Log)";
-            DataTable data  = _db.GetDataTable(sql);
+            DataTable data = _db.GetDataTable(sql);
             int qoutes = 0;
             if (data != null && data.Rows.Count > 0)
             {
                 qoutes = Converter.ToInt(data.Rows[0]["Remaining_quotes"]);
             }
 
-            return qoutes; 
+            return qoutes;
         }
     }
 }

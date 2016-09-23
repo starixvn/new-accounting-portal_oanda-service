@@ -16,15 +16,16 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
     using Fanex.MailDelivery.Client.Models;
     using Fanex.OandaExChangeRate.Business.DataAccess;
     using Fanex.OandaExChangeRate.Business.Model;
-    using RazorEngine;
     using Fanex.Service.Core.Extensions;
+    using RazorEngine;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class MailingExChangeRate : IMailingExChangeRate
     {
-        IRemainingQuoteDAO _remainingQuoteDAO;
+        private IRemainingQuoteDAO _remainingQuoteDAO;
+
         public MailingExChangeRate()
         {
             _remainingQuoteDAO = new RemainingQuoteDAO();
@@ -46,7 +47,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 
             mail.Attachments = new List<MailAttachment>();
             mail.Attachments.Add(new MailAttachment(@exchageRateService.FolderPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-            
+
             return mail;
         }
 
@@ -86,7 +87,6 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
             }
         }
 
-
         public void UpdateRemainingQuotes()
         {
             try
@@ -95,12 +95,12 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 
                 string quotes = _remainingQuoteDAO.GetRemainningQuote();
 
-                int currentQuotes = Converter.ToInt(quotes.Replace(",", string.Empty)); 
+                int currentQuotes = Converter.ToInt(quotes.Replace(",", string.Empty));
                 int quotesFromDB = _remainingQuoteDAO.SelectLastest();
                 int variance = Math.Abs(quotesFromDB - currentQuotes);
                 if (variance >= AppSettings.RemainingVariance)
                 {
-                    _remainingQuoteDAO.Insert(currentQuotes); 
+                    _remainingQuoteDAO.Insert(currentQuotes);
                     _remainingQuoteDAO.Delete();
 
                     mail.Body = GenerateBody(_remainingQuoteDAO.SelectAll());
@@ -122,7 +122,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
             List<RemainingQuote> quotes = new List<RemainingQuote>();
             foreach (DataRow row in data.Rows)
             {
-                quotes.Add(new RemainingQuote() 
+                quotes.Add(new RemainingQuote()
                 {
                     CreatedDate = Converter.ToDateTime(row["CreatedDate"]),
                     Quotes = string.Format("{0:#,##0}", Converter.ToInt(row["Remaining_quotes"]))

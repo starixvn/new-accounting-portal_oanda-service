@@ -14,10 +14,10 @@ namespace Fanex.NAPReport.OandaExChangeRate.Service
     using Fanex.NAPReport.OandaExChangeRate.Business;
     using System.Timers;
     using Fanex.NAPReport.OandaExChangeRate.Business.Services;
-
-    /// <summary>
-    /// Auto mail service.
-    /// </summary>
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;    /// <summary>
+                                       /// Auto mail service.
+                                       /// </summary>
     public partial class AutoMailService : ServiceBase
     {
         /// <summary>
@@ -63,12 +63,25 @@ namespace Fanex.NAPReport.OandaExChangeRate.Service
             if (!AppSettings.OnProcessing)
             {
                 AppSettings.OnProcessing = true;
+                var um = IsUnderMaintenance();
+                if (!um)
+                {
+                    IMailingExChangeRate exchangeRate = new MailingExChangeRate();
 
-                IMailingExChangeRate exChangeRate = new MailingExChangeRate();
-                exChangeRate.UpdateRemainingQuotes();
+                    if (!AppSettings.IsSimulateRate)
+                    {
+                        exchangeRate.UpdateRemainingQuotes();
+                    }
+                }
 
                 AppSettings.OnProcessing = false;
             }
+        }
+
+        private static bool IsUnderMaintenance()
+        {
+            IMaintenanceService maintenanceService = new MaintenanceService();
+            return maintenanceService.IsUnderMaintenance();
         }
     }
 }

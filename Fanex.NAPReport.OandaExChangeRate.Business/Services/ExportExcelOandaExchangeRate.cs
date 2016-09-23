@@ -7,21 +7,23 @@
 namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 {
     using System;
-    using System.Collections;
-    using System.Data;
-    using System.IO;
-    using Fanex.Data;
+    using System.Collections.Generic;
     using Fanex.Service.Core.Common;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Utilities;
     using NPOI.XSSF.UserModel;
-    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class ExportExcelOandaExchangeRate : ExportExcelOandaExchangeRateBase, IExportExcelOandaExchangeRate
     {
+        public string FolderPath
+        {
+            get;
+            set;
+        }
+
         public void ExportExcel(Dictionary<string, Dictionary<string, double>> allCurrenciesList, string remainingQuotes)
         {
             var baseCurrencies = AppSettings.BaseCurrencies;
@@ -71,7 +73,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
                 NPOIUtility.ResetColumnIndex(ref _cellInfo);
-            }            
+            }
         }
 
         private void ExportFooter(string remainingQuotes)
@@ -91,13 +93,6 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, reportName, _workbook);
 
             GC.Collect();
-        }
-
-
-        public string FolderPath
-        {
-            get;
-            set;
-        }
+        }        
     }
 }

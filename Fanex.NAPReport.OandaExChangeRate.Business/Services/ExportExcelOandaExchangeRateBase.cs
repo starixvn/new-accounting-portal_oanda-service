@@ -6,15 +6,10 @@
 
 namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 {
-    using System;
-    using System.Collections;
-    using System.Data;
     using System.Drawing;
-    using Fanex.Data;
     using Fanex.Service.Core.Common;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
-    using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
 
@@ -78,8 +73,6 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
             _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
             worksheet.CreateFreezePane(1, 1, 1, 1);
         }
-
-
 
         private void InitAlignmentInfo()
         {

@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.NAPReport.OandaExChangeRate.Service", "Fanex.NAPReport.OandaExChangeRate.Service", "{E6BD08A5-9D50-42EF-97E9-63CA45952F60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.ConsoleApps.Testing", "Fanex.ConsoleApps.Testing", "{F306C8AB-CE96-4D5B-A5D2-6CACBF8124C0}"

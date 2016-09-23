@@ -11,6 +11,8 @@ namespace Fanex.NAPReport.OandaExChangeRate.Service.Jobs
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.OandaExChangeRate.Business.Services;
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;
     using Quartz;
 
     /// <summary>
@@ -20,15 +22,34 @@ namespace Fanex.NAPReport.OandaExChangeRate.Service.Jobs
     {
         protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
         {
-            IMailingExChangeRate service = new MailingExChangeRate();
-            Mail mail = service.UpdateDailyExchangeRate();
-
-            return new JobResultMessage()
+            var um = IsUnderMaintenance();
+            if (!um)
             {
-                JobStatus = JobStatus.Success,
-                Mail = mail,
-                Schedule = schedule
-            };
+                IMailingExChangeRate service = new MailingExChangeRate();
+                Mail mail = service.UpdateDailyExchangeRate();
+
+                return new JobResultMessage()
+                {
+                    JobStatus = JobStatus.Success,
+                    Mail = mail,
+                    Schedule = schedule
+                };
+            }
+            else
+            {
+                return new JobResultMessage()
+                {
+                    JobStatus = JobStatus.DataIsNotReady,
+                    Mail = null,
+                    Schedule = schedule
+                };
+            }
+        }
+
+        private bool IsUnderMaintenance()
+        {
+            IMaintenanceService maintenanceService = new MaintenanceService();
+            return maintenanceService.IsUnderMaintenance();
         }
     }
 }

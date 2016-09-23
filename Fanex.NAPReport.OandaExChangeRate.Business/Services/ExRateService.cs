@@ -2,13 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Web.UI;
     using Fanex.NAPReport.OandaExChangeRate.Business.DataAccess;
     using Fanex.NAPReport.OandaExChangeRate.Business.Model;
     using Fanex.NAPReport.OandaExChangeRate.Business.Services.CurrencyConverter;
-    using Fanex.Service.Core.Extensions;
     using Fanex.OandaExChangeRate.Business.DataAccess;
+    using Fanex.Service.Core.Extensions;
     using RazorEngine;
 
     public class ExRateService
@@ -23,8 +24,20 @@
             _exportExcel = new ExportExcelOandaExchangeRate();
         }
 
+        public string FolderPath
+        {
+            get;
+            set;
+        }
+
+        public string BodyContent
+        {
+            get;
+            set;
+        }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fromCurrency">Ex: USD</param>
         /// <param name="toCurrency">Ex: VND</param>
@@ -55,6 +68,7 @@
             return rate;
         }
 
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public Result UpdateRate(string[] listBaseCurrency)
         {
             var updateResult = new Result { ErrorCode = 0, ErrorMsg = string.Empty };
@@ -106,17 +120,17 @@
                 foreach (var baseCurrency in listBaseCurrency)
                 {
                     htmlContent.RenderBeginTag(HtmlTextWriterTag.Td);
-                    double rate = 0;                   
+                    double rate = 0;
                     rate = GetExchangeRate(currency, baseCurrency, DateTime.Now.ToShortDateString());
 
                     if (rate == 0)
                     {
                         throw new Exception("currency: " + currency + ", baseCurrency: " + baseCurrency + ", rate: " + rate.ToString());
                     }
-               
+
                     exchangeRateList.Add(baseCurrency, rate);
                     htmlContent.Write(rate);
-                    htmlContent.RenderEndTag();                    
+                    htmlContent.RenderEndTag();
                 }
 
                 var result = new Result();
@@ -150,7 +164,7 @@
                 _exportExcel.ExportExcel(allCurrenciesList, remainingQuotes);
                 FolderPath = _exportExcel.FolderPath;
             }
-            
+
             string content = string.Empty;
             if (listError.Count > 0)
             {
@@ -179,6 +193,7 @@
             return updateResult;
         }
 
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public Result UpdateRate(string[] listBaseCurrency, DateTime exchangeDate)
         {
             var updateResult = new Result { ErrorCode = 0, ErrorMsg = string.Empty };
@@ -293,19 +308,7 @@
             }
 
             return result;
-        }
-
-        public string FolderPath
-        {
-            get;
-            set;
-        }
-
-        public string BodyContent
-        {
-            get;
-            set;
-        }
+        }        
 
         private string GetNoteEmailTemplate()
         {
