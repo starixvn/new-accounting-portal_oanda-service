@@ -29,7 +29,7 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
 
         public string GetRemainningQuote()
         {
-            if(AppSettings.IsSimulateRate)
+            if (AppSettings.IsSimulateRate)
             {
                 return "0";
             }
