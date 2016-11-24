@@ -12,11 +12,11 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
     using System.IO;
     using System.Threading;
     using Fanex.Common;
-    using Fanex.MailDelivery.Client.Handlers;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.OandaExChangeRate.Business.DataAccess;
     using Fanex.OandaExChangeRate.Business.Model;
     using Fanex.Service.Core.Extensions;
+    using MailDelivery.Client;
+    using MailDelivery.Core.Models;
     using RazorEngine;
 
     /// <summary>
@@ -46,7 +46,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
             mail.Body = exchageRateService.BodyContent;
 
             mail.Attachments = new List<MailAttachment>();
-            mail.Attachments.Add(new MailAttachment(@exchageRateService.FolderPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+            mail.Attachments.Add(new MailAttachment(@exchageRateService.FolderPath, FileExtension.MS_EXCEL));
 
             return mail;
         }
@@ -108,7 +108,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
                     mail.Title = AppSettings.MailTitle;
                     mail.MailingListId = AppSettings.MailingListId;
 
-                    MailClientHandler.SendMail(mail);
+                    MailClientHandler.SendFunctionMail(mail);
                 }
             }
             catch (Exception ex)
