@@ -4,14 +4,10 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.MailDelivery.Core.Models;
+
 namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.MailDelivery.Client.Models;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
