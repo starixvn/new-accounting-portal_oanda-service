@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.NAPReport.OandaExChangeRate.Service", "Fanex.NAPReport.OandaExChangeRate.Service", "{E6BD08A5-9D50-42EF-97E9-63CA45952F60}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.OandaExChangeRate.Business", "Fanex.NAPReport.OandaExChangeRate.Business\Fanex.NAPReport.OandaExChangeRate.Business.csproj", "{41B6421F-B8A6-48AA-A9FF-FB3040E5C43F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.OandaExChangeRate.Testing", "Fanex.NAPReport.OandaExChangeRate.Testing\Fanex.NAPReport.OandaExChangeRate.Testing.csproj", "{079BD04E-333E-452B-B022-2BCE8743286F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Service.Core", "Fanex.Service.Core\Fanex.Service.Core.csproj", "{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,18 @@ Global
 		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|Mixed Platforms.Build.0 = Release|x86
 		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|x86.ActiveCfg = Release|x86
 		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|x86.Build.0 = Release|x86
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Debug|x86.Build.0 = Debug|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Release|x86.ActiveCfg = Release|Any CPU
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +83,6 @@ Global
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C} = {E6BD08A5-9D50-42EF-97E9-63CA45952F60}
 		{41B6421F-B8A6-48AA-A9FF-FB3040E5C43F} = {E6BD08A5-9D50-42EF-97E9-63CA45952F60}
 		{079BD04E-333E-452B-B022-2BCE8743286F} = {F306C8AB-CE96-4D5B-A5D2-6CACBF8124C0}
+		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B} = {E6BD08A5-9D50-42EF-97E9-63CA45952F60}
 	EndGlobalSection
 EndGlobal
