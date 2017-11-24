@@ -160,7 +160,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
         {
             get 
             {
-                return GetSettingValueByKey("SQLiteDBPath");
+                return @"Data Source=SQLiteDB\AutoMail-ExchangeRateOanda.s3db;Version=3;";
             }
         }
 
