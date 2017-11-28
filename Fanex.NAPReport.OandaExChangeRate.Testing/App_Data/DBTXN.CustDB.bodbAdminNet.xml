@@ -2,6 +2,6 @@
 <Functions>
   <Function Name="Exchange rate">
     <Setting Key="Acc_ExchangeDailyIns" SpName="Acc_ExchangeDailyIns_xtest" DbName="DBCUST.CustDB.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_ExchangeDaily_ActualRateUpd" SpName="Acc_ExchangeDaily_ActualRateUpd" DbName="DBCUST.CustDB.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_ExchangeDaily_ActualRateUpd" SpName="Acc_ExchangeDaily_ActualRateUpd_xtest" DbName="DBCUST.CustDB.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>
