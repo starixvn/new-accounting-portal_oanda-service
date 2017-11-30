@@ -9,14 +9,13 @@ namespace Fanex.NAPReport.OandaExChangeRate.Service
     using System;
     using System.IO;
     using System.ServiceProcess;
-    using Fanex.Data.Configuration;
-    using Fanex.MailDelivery.Client.Handlers;
-    using Fanex.NAPReport.OandaExChangeRate.Business;
     using System.Timers;
+    using Fanex.Data.Configuration;
+    using Fanex.NAPReport.OandaExChangeRate.Business;
     using Fanex.NAPReport.OandaExChangeRate.Business.Services;
+    using MailDelivery.Client;
     using ONEbook.UM.Services;
     using ONEbook.UM.Services.Impl;
-    using MailDelivery.Client;
 
     public partial class AutoMailService : ServiceBase
     {

@@ -1,31 +1,45 @@
 ﻿using System;
 using System.IO;
 using Fanex.Data.Configuration;
+using Fanex.MailDelivery.Core.Models;
 using Fanex.NAPReport.OandaExChangeRate.Business.Services;
+using Newtonsoft.Json;
 
 namespace Fanex.NAPReport.OandaExChangeRate.Testing
 {
-    internal class Program
+    internal static class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
+            var result = new JobMessage();
             try
             {
                 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-
                 DbSettingProviderManager.Current.Start();
 
                 IMailingExChangeRate exchangerate = new MailingExChangeRate();
-                exchangerate.UpdateDailyExchangeRate();
-
-                Console.WriteLine("Done at " + DateTime.Now.ToString());
+                var mail = exchangerate.UpdateDailyExchangeRate();
+                result = new JobMessage
+                {
+                    Mail = mail,
+                    JobStatus = JobStatus.Success
+                };
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                result.JobStatus = JobStatus.DataIsNotReady;
+                result.TaskLog = new TaskLog
+                {
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace
+                };
             }
-
-            Console.ReadLine();
+            finally
+            {
+                var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                Console.WriteLine(json);
+                Environment.Exit(0);
+            }
         }
     }
 }

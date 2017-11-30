@@ -88,7 +88,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
         private void SaveExcelFile()
         {
             DateTime dateTime = DateTime.Now;
-            var reportName = "Oanda_Exchange_Rate_For_" + dateTime.ToString("yyyy_MM_dd") + "_at_" + dateTime.ToString("hh_MM_tt") + ".xlsx";
+            var reportName = "Oanda_Exchange_Rate_For_" + dateTime.ToString("yyyy_MM_dd") + "_at_" + dateTime.ToString("hh_mm_tt") + ".xlsx";
             FolderPath = AppSettings.ExportDataDirectory + @"\" + reportName;
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, AppSettings.ExportDataDirectory, reportName, _workbook);
 
