@@ -1,6 +1,7 @@
 ﻿namespace Fanex.NAPReport.OandaExChangeRate.Business.Services.CurrencyConverter
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Xml;
@@ -21,6 +22,12 @@
 
     public class OandaConvertor : BaseCurrencyConvertor
     {
+
+        private List<string> specialCurrencies = new List<string>
+        {
+            "IDR", "VND"
+        };
+
         public override string GetExchageRate(string fromCurrency, string toCurrency, string rateDate)
         {
             string ask = "0", bid = "0";
@@ -41,6 +48,11 @@
 
                 var url = AppSettings.OandaUrl;
                 url = string.Format(url, fromCurrency.Trim(), toCurrency.Trim(), date, AppSettings.APIKey);
+                if(specialCurrencies.Contains(fromCurrency))
+                {
+                    url = url + "&decimal_places=8";
+                }
+
                 var request = WebRequest.Create(url);
                 var response = request.GetResponse();
 
