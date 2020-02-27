@@ -32,7 +32,7 @@
         public override string GetExchageRate(string fromCurrency, string toCurrency, string rateDate)
         {
             string ask = "0", bid = "0";
-            string date = Convert.ToDateTime(rateDate).ToString("yyyy-MM-dd");
+            string date = Convert.ToDateTime(rateDate).AddDays(-1).ToString("yyyy-MM-dd");
             try
             {
                 if (fromCurrency.Equals(toCurrency))
@@ -49,10 +49,6 @@
 
                 var url = AppSettings.OandaUrl;
                 url = string.Format(url, fromCurrency.Trim(), toCurrency.Trim(), date, AppSettings.APIKey);
-                if (specialCurrencies.Contains(fromCurrency))
-                {
-                    url = url + "&decimal_places=8";
-                }
 
                 var request = WebRequest.Create(url);
                 var response = request.GetResponse();
@@ -63,13 +59,13 @@
 
                 foreach (XmlNode node in xnlist)
                 {
-                    var askTag = node.SelectNodes("ask");
+                    var askTag = node.SelectNodes("average_ask");
                     if (askTag.Count > 0)
                     {
                         ask = askTag[0].InnerText;
                     }
 
-                    var bidTag = node.SelectNodes("bid");
+                    var bidTag = node.SelectNodes("average_bid");
                     if (bidTag.Count > 0)
                     {
                         bid = bidTag[0].InnerText;

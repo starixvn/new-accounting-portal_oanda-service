@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using Fanex.Data.Configuration;
+﻿using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.NAPReport.OandaExChangeRate.Business.Services;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace Fanex.NAPReport.OandaExChangeRate.Executing
 {
