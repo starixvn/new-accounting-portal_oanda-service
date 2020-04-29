@@ -1,29 +1,29 @@
 ﻿namespace Fanex.NAPReport.OandaExChangeRate.Business.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.Web.UI;
     using Fanex.NAPReport.OandaExChangeRate.Business.DataAccess;
     using Fanex.NAPReport.OandaExChangeRate.Business.Model;
     using Fanex.NAPReport.OandaExChangeRate.Business.Services.CurrencyConverter;
     using Fanex.OandaExChangeRate.Business.DataAccess;
     using Fanex.Service.Core.Extensions;
     using RazorEngine;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Web.UI;
 
     public class ExRateService
     {
         private IExchangeRateDAO _exchagenRateDAO;
         private IExportExcelOandaExchangeRate _exportExcel;
-        private Random _random = new Random();        
+        private Random _random = new Random();
 
         public ExRateService()
         {
             _exchagenRateDAO = new ExchangeRateDAO();
             _exportExcel = new ExportExcelOandaExchangeRate();
-
         }
+
         public string FolderPath
         {
             get;
@@ -122,6 +122,10 @@
                     htmlContent.RenderBeginTag(HtmlTextWriterTag.Td);
                     double rate = 0;
                     rate = GetExchangeRate(currency, baseCurrency, DateTime.Now.ToShortDateString());
+                    if (currency.ToLower().Equals("ves"))
+                    {
+                        rate = 0.00001;
+                    }
 
                     if (rate == 0)
                     {
@@ -311,7 +315,7 @@
             }
 
             return result;
-        }        
+        }
 
         private string GetNoteEmailTemplate()
         {
