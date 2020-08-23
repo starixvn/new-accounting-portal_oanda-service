@@ -173,6 +173,14 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="App_Data\DBCUST.CustDB.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\DBEXT.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="deployment.ignore">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -192,16 +200,12 @@
     <Content Include="SQLiteDB\AutoMail-ExchangeRateOanda.s3db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Fanex.NAPReport.OandaExChangeRate.Testing.PRO.exe.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\DBTXN.CustDB.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="data-2015-04-30.xml" />
   </ItemGroup>
   <ItemGroup />
