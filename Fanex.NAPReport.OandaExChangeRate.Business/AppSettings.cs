@@ -5,10 +5,10 @@
 // -----------------------------------------------------------------------
 namespace Fanex.NAPReport.OandaExChangeRate.Business
 {
-    using System;
-    using System.Configuration;
     using Fanex.Common;
     using Fanex.Service.Core.Utilities;
+    using System;
+    using System.Configuration;
 
     /// <summary>
     /// Application setting.
@@ -38,7 +38,7 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
                 return ExportDataDirectory("Fanex.OandaExchangeRate.ExportDataDirectory");
             }
         }
-      
+
         public static string MailSubject
         {
             get
@@ -82,12 +82,12 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
             }
         }
 
-        public static bool IsInsertHistoryRate 
-        { 
-            get 
+        public static bool IsInsertHistoryRate
+        {
+            get
             {
-                return ConfigurationManager.AppSettings["OandaExchangeRate.IsInsertHistoryRate"].Equals("1"); 
-            } 
+                return ConfigurationManager.AppSettings["OandaExchangeRate.IsInsertHistoryRate"].Equals("1");
+            }
         }
 
         public static DateTime FromHistoryDate
@@ -133,9 +133,9 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
 
         public static string APIKey
         {
-            get 
+            get
             {
-                string key = ConfigurationManager.AppSettings["OandaExchangeRate.APIKey"].ToString(); 
+                string key = ConfigurationManager.AppSettings["OandaExchangeRate.APIKey"].ToString();
                 if (IsEncryptionKey)
                 {
                     key = Fanex.Common.Cryptography.CfsDeCrypt(key);
@@ -151,14 +151,14 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
             {
                 string url = ConfigurationManager.AppSettings["OandaExchangeRate.RemainingQuoteUrl"].ToString();
                 url = string.Format(url, APIKey);
-                
+
                 return url;
             }
         }
 
         public static string ConnectionString
         {
-            get 
+            get
             {
                 return @"Data Source=SQLiteDB\AutoMail-ExchangeRateOanda.s3db;Version=3;";
             }
@@ -196,10 +196,14 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
 
         public static string NapReportURL
         {
-            get 
+            get
             {
                 return GetSettingValueByKey("OandaExchangeRate.NapReportURL");
             }
         }
+
+        public static bool IsManual => ConfigurationManager.AppSettings["OandaExchangeRate.IsManual"] == "true";
+
+        public static string ManualGetRateDate => ConfigurationManager.AppSettings["OandaExchangeRate.ManualGetRateDate"];
     }
 }

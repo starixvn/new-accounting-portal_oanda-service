@@ -117,11 +117,13 @@
                 htmlContent.RenderBeginTag(HtmlTextWriterTag.Td);
                 htmlContent.Write(currency);
                 htmlContent.RenderEndTag();
+                var rateDate = AppSettings.IsManual ? AppSettings.ManualGetRateDate : DateTime.Now.ToShortDateString();
                 foreach (var baseCurrency in listBaseCurrency)
                 {
                     htmlContent.RenderBeginTag(HtmlTextWriterTag.Td);
                     double rate = 0;
-                    rate = GetExchangeRate(currency, baseCurrency, DateTime.Now.ToShortDateString());
+
+                    rate = GetExchangeRate(currency, baseCurrency, rateDate);
                     if (currency.ToLower().Equals("ves"))
                     {
                         rate = 0.00001;
@@ -138,13 +140,17 @@
                 }
 
                 var result = new Result();
-                if (!AppSettings.IsInsertHistoryRate)
+                if (AppSettings.IsManual)
+                {
+                    result = _exchagenRateDAO.UpdateRate(currency, Convert.ToDateTime(rateDate), exchangeRateList);
+                }
+                else
                 {
                     result = _exchagenRateDAO.UpdateRate(currency, DateTime.Now, exchangeRateList);
                     result = _exchagenRateDAO.UpdateRate(currency, DateTime.Now.AddDays(1), exchangeRateList);
-
-                    allCurrenciesList.Add(currency, exchangeRateList);
                 }
+
+                allCurrenciesList.Add(currency, exchangeRateList);
 
                 if (0 != result.ErrorCode)
                 {
@@ -152,8 +158,6 @@
                 }
 
                 htmlContent.RenderEndTag();
-
-                string currentCurrency = "Currency: " + currency + " - DateTime: " + DateTime.Now.ToString();
             }
 
             htmlContent.RenderEndTag();
