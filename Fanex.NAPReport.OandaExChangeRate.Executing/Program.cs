@@ -5,7 +5,7 @@ using Fanex.MailDelivery.Core.Models;
 using Fanex.NAPReport.OandaExChangeRate.Business.Services;
 using Newtonsoft.Json;
 
-namespace Fanex.NAPReport.OandaExChangeRate.Testing
+namespace Fanex.NAPReport.OandaExChangeRate.Executing
 {
     internal static class Program
     {
