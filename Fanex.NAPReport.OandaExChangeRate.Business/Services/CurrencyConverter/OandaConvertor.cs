@@ -1,5 +1,6 @@
 ﻿namespace Fanex.NAPReport.OandaExChangeRate.Business.Services.CurrencyConverter
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -8,7 +9,7 @@
 
     /*
      * Send a request to FXCSV:
- 
+
        - Connect to http://www.oanda.com/cgi-bin/fxcsv/fxcsv and create your request with
         client_id=*********
         expr=list of currencies (or one currency). This is home currency
@@ -16,13 +17,12 @@
         amount=amount for the exchange. Optional. Default value=1
         date=MM/DD/YYYY (starting date for the conversion). Optional. Default value=today
         nprices=number of conversions you wish to receive. Optional. Default value=1
- 
+
         http://www.oanda.com/cgi-bin/fxcsv/fxcsv?client_id=[customerid]&expr=[list_home_currencies] &exch=[list_of_quote_currencies]
      */
 
     public class OandaConvertor : BaseCurrencyConvertor
     {
-
         private List<string> specialCurrencies = new List<string>
         {
             "IDR", "VND"
@@ -48,7 +48,7 @@
 
                 var url = AppSettings.OandaUrl;
                 url = string.Format(url, fromCurrency.Trim(), toCurrency.Trim(), date, AppSettings.APIKey);
-                if(specialCurrencies.Contains(fromCurrency))
+                if (specialCurrencies.Contains(fromCurrency))
                 {
                     url = url + "&decimal_places=8";
                 }
