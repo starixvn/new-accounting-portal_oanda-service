@@ -11,7 +11,7 @@
     {
         public List<string> GetCurrencyCodeList()
         {
-            var currencyCodeList = new List<string>();            
+            var currencyCodeList = new List<string>();
             using (ObjectDb db = new ObjectDb("Acc_ExchangeCodeSel"))
             {
                 var reader = db.ExecuteReader();
@@ -56,11 +56,11 @@
 
                 using (ObjectDb db = new ObjectDb("Acc_ExchangeDailyIns"))
                 {
-                    db.AssignParamValues(parameters);                    
+                    db.AssignParamValues(parameters);
                     db.ExecuteNonQuery();
 
                     var outputParameters = db.GetOuputParams();
-                    
+
                     result.ErrorCode = Converter.ToInt(outputParameters["errcode"]);
                     result.ErrorMsg = Convert.ToString(outputParameters["errmsg"]);
                 }
@@ -99,6 +99,14 @@
             }
 
             return result;
+        }
+
+        public void UpdateOANDASettingReadiness()
+        {
+            using (ObjectDb db = new ObjectDb("Task_UpdateOANDASettingReadiness"))
+            {
+                db.ExecuteNonQuery();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Fanex.NAPReport.OandaExChangeRate.Business.Services.CurrencyConverter
 {
+    using Fanex.OandaExChangeRate.Business.Services;
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
@@ -78,6 +79,8 @@
             catch (Exception ex)
             {
                 string msg = "fromCurrency: " + fromCurrency + ", toCurrency: " + toCurrency + ", date: " + date + ", Exception: " + ex.Message;
+                var messageService = new MessageServiceImp();
+                messageService.SendMessage(msg);
                 throw new Exception(msg);
             }
 

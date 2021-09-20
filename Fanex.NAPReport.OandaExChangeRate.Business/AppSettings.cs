@@ -205,5 +205,11 @@ namespace Fanex.NAPReport.OandaExChangeRate.Business
         public static bool IsManual => ConfigurationManager.AppSettings["OandaExchangeRate.IsManual"] == "true";
 
         public static string ManualGetRateDate => ConfigurationManager.AppSettings["OandaExchangeRate.ManualGetRateDate"];
+
+        public static string LetstalkServiceApi => ConfigurationManager.AppSettings["LetstalkServiceApi"];
+
+        public static string TargetName => ConfigurationManager.AppSettings["TargetName"];
+
+        public static string LetstalkGroup => ConfigurationManager.AppSettings["LetstalkGroup"];
     }
 }

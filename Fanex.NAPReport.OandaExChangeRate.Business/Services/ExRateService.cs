@@ -4,6 +4,7 @@
     using Fanex.NAPReport.OandaExChangeRate.Business.Model;
     using Fanex.NAPReport.OandaExChangeRate.Business.Services.CurrencyConverter;
     using Fanex.OandaExChangeRate.Business.DataAccess;
+    using Fanex.OandaExChangeRate.Business.Services;
     using Fanex.Service.Core.Extensions;
     using RazorEngine;
     using System;
@@ -131,7 +132,10 @@
 
                     if (rate == 0)
                     {
-                        throw new Exception("currency: " + currency + ", baseCurrency: " + baseCurrency + ", rate: " + rate.ToString());
+                        var msg = "currency: " + currency + ", baseCurrency: " + baseCurrency + ", rate: " + rate.ToString();
+                        var messageService = new MessageServiceImp();
+                        messageService.SendMessage(msg);
+                        throw new Exception(msg);
                     }
 
                     exchangeRateList.Add(baseCurrency, rate);
@@ -313,6 +317,7 @@
         public Result UpdateIbcRate()
         {
             var result = _exchagenRateDAO.UpdateIbcRate();
+            _exchagenRateDAO.UpdateOANDASettingReadiness();
             if (result.ErrorCode != 0)
             {
                 throw new Exception(result.ErrorMsg);
