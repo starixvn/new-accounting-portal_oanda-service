@@ -11,5 +11,7 @@
         Result UpdateRate(string fromCurrency, DateTime runDate, Dictionary<string, double> toCurrency);
 
         Result UpdateIbcRate();
+
+        void UpdateOANDASettingReadiness();
     }
 }
